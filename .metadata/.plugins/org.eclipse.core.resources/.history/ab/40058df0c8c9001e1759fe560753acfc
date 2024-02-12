@@ -1,0 +1,181 @@
+package test;
+import java.util.*;
+import modelo.entidad.*;
+import persistencia.*;
+import persistencia.interfaces.*;
+
+public class TestGestionCoches {
+
+	public static void main(String[] args) {
+		 	int opcionMenu, opcionSubmenu;
+	        Scanner sc = new Scanner(System.in);
+	        
+	        do {
+	            menu();
+	            opcionMenu = sc.nextInt();
+	            
+	            switch(opcionMenu) {
+	            
+	            case 1:
+	            	System.out.println("1. Añadir nuevo coche");
+	            	nuevoCoche();
+	                break;
+	            
+	            case 2:
+	            	System.out.println("2. Borrar coche por ID");
+	            	bajaCoche();
+	                break;
+	            
+	            case 3:
+	            	System.out.println("3. Consulta coche por ID");
+	                break;
+	            
+	            case 4:
+	            	System.out.println("4. Modificar coche por ID");
+	                break;  
+	                
+	            case 5:
+	            	System.out.println("5. Listado de coches");
+	                break;
+	                
+	            case 6:
+	            	System.out.println("6. Gestión de pasajeros");
+	            	do {
+	    	            submenu();
+	    	            opcionSubmenu = sc.nextInt();
+	    	            
+	    	            switch(opcionSubmenu) {
+	    	            
+	    	            case 1:
+	    	            	System.out.println("1. Crear nuevo pasajero");
+	    	                break;
+	    	            
+	    	            case 2:
+	    	            	System.out.println("2. Borrar pasajero por ID");
+	    	                break;
+	    	            
+	    	            case 3:
+	    	            	System.out.println("3. Consulta pasajero por ID");
+	    	                break;
+	    	            
+	    	            case 4:
+	    	            	System.out.println("4. Listar todos los pasajeros");
+	    	                break;  
+	    	                
+	    	            case 5:
+	    	            	System.out.println("5. Añadir pasajero a coche");
+	    	                break;
+	    	                
+	    	            case 6:
+	    	            	System.out.println("6. Eliminar pasajero de un coche");
+	    	                break;    
+	    	            
+	    	            case 7:
+	    	                System.out.println("7. Listar todos los pasajeros de un coche");
+	    	                break;
+	    	            
+	    	            case 8:
+	    	                System.out.println("8. Volver al menú principal");
+	    	                break;    
+	    	                
+	    	            default:
+	    	                System.out.println("Opción no válida");
+	    	                break;  
+	    	            }
+	    	            
+	    	        } while(opcionSubmenu != 8);
+	                break;    
+	            
+	            case 7:
+	                System.out.println("Saliendo del programa...");
+	                break;
+	                
+	            default:
+	                System.out.println("Opción no válida");
+	                break;  
+	            }
+	            
+	        } while(opcionMenu != 7);
+	        
+	        System.out.println("Programa finalizado.");
+	        System.exit(0);
+
+	}
+	
+	public static void menu() {
+		System.out.println("");
+		System.out.println("-------MENÚ-------");
+		System.out.println("Seleccione una de las siguientes opciones:");
+		System.out.println("");
+		System.out.println("1. Añadir nuevo coche");
+		System.out.println("2. Borrar coche por ID");
+		System.out.println("3. Consulta coche por ID");
+		System.out.println("4. Modificar coche por ID");
+		System.out.println("5. Listado de coches");
+		System.out.println("6. Gestión de pasajeros");
+		System.out.println("7. Terminar el programa");
+		System.out.println("");
+	}
+	
+	public static void submenu() {
+		System.out.println("");
+		System.out.println("------GESTIÓN DE PASAJEROS------");
+		System.out.println("Seleccione una de las siguientes opciones:");
+		System.out.println("");
+		System.out.println("1. Crear nuevo pasajero");
+		System.out.println("2. Borrar pasajero por ID");
+		System.out.println("3. Consulta pasajero por ID");
+		System.out.println("4. Listar todos los pasajeros");
+		System.out.println("5. Añadir pasajero a coche");
+		System.out.println("6. Eliminar pasajero de un coche");
+		System.out.println("7. Listar todos los pasajeros de un coche");
+		System.out.println("8. Volver al menú principal");
+		System.out.println("");
+	}
+	
+	public static void nuevoCoche() {
+		Scanner sc = new Scanner(System.in);
+		String marca, modelo = "";
+		int prod, km = 0;
+		Coche coche = new Coche();
+		
+		System.out.println("Indique la marca del nuevo coche:");
+		marca = sc.nextLine();
+		System.out.println("Indique el modelo del nuevo coche:");
+		modelo = sc.nextLine();
+		System.out.println("Indique el año de producción del nuevo coche:");
+		prod = sc.nextInt();
+		System.out.println("Indique los kilómetros del nuevo coche:");
+		km = sc.nextInt();
+		
+		coche.setMarca(marca);
+		coche.setModelo(modelo);
+		coche.setYearProduccion(prod);
+		coche.setKm(km);
+		DaoCoche dc = new DaoCocheMySql();
+		boolean alta = dc.alta(coche);
+		
+		if(alta){
+			System.out.println("El coche se ha dado de alta correctamente");
+		}else{
+			System.out.println("El coche no se ha podido dar de alta");
+		}
+		
+	}
+	
+	public static void bajaCoche() {
+		Scanner sc = new Scanner(System.in);
+		int id = 0;
+		System.out.println("Indique el ID del coche que quiere dar de baja:");
+		id = sc.nextInt();
+		DaoCoche dc = new DaoCocheMySql();
+		boolean baja = dc.baja(id);
+		
+		if(baja){
+			System.out.println("El coche se ha dado de baja");
+		}else{
+			System.out.println("El coche no se ha podido dar de baja");
+		}
+	}
+
+}

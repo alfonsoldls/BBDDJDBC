@@ -1,0 +1,5 @@
+INDEX VERSION 1.132+C:\Users\aleja\Desktop\EDIX\2º\Acceso a Datos\Actividad_2_Manejo_de_conectores_de_BBDD_JDBC\.metadata\.plugins\org.eclipse.jdt.core
+3118403774.index
+2020064497.index
+1865797976.index
+1369044825.index
