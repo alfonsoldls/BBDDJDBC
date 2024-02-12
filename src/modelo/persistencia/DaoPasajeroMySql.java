@@ -14,7 +14,7 @@ public class DaoPasajeroMySql extends AbstractDaoMySql implements DaoPasajero {
 
 	@Override
 	public boolean altaPasajero(Pasajero p) {
-		sql = "insert into pasajero values (?,?,?)";
+		sql = "insert into pasajero (nombre,edad, peso) values (?,?,?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, p.getNombre());
@@ -28,6 +28,7 @@ public class DaoPasajeroMySql extends AbstractDaoMySql implements DaoPasajero {
 				return true;
 			
 		} catch (SQLException e) {
+			System.out.println("SQL Error: " + e.getMessage());
 			return false;
 		}
 	}
@@ -53,6 +54,7 @@ public class DaoPasajeroMySql extends AbstractDaoMySql implements DaoPasajero {
 	@Override
 	public Pasajero consultaPasajero(int id) {
 		sql = "select * from pasajero where id = ?";
+		DaoCoche dc = new DaoCocheMySql();
 		Pasajero p = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -64,6 +66,7 @@ public class DaoPasajeroMySql extends AbstractDaoMySql implements DaoPasajero {
 				p.setNombre(rs.getString("nombre"));
 				p.setEdad(rs.getInt("edad"));
 				p.setPeso(rs.getFloat("peso"));
+				p.setCoche(dc.consultaCoche(rs.getInt("coche_id")));
 			}
 		} catch (SQLException e) {
 			return p;

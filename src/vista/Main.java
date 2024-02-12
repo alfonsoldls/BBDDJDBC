@@ -59,7 +59,7 @@ public class Main {
 	}
 
 	private static void mostrarMenuPrincipal() {
-			System.out.println("-------MENÚ-------\n\n");
+			System.out.println("\n\n-------MENÚ-------\n\n");
 			System.out.println("1. Añadir nuevo coche");
 			System.out.println("2. Borrar coche por Id");
 			System.out.println("3. Consulta coche por id");
@@ -183,7 +183,7 @@ public class Main {
 		p.setPeso(Float.parseFloat(sc.nextLine()));
 		
 		if(gp.altaPasajero(p))
-			System.out.println("El pasajero se ha dado de baja correctamente");
+			System.out.println("El pasajero se ha dado de alta correctamente");
 		else
 			System.out.println("No se ha podido dar de alta");
 	}
@@ -225,9 +225,9 @@ public class Main {
 		System.out.println("Introduce el ID del coche");
 		int idCoche = Integer.parseInt(sc.nextLine());
 		if(gp.bajaPasajeroACoche(idCoche, idPasajero))
-			System.out.println("Se ha dado de baja al pasajero");
+			System.out.println("Se ha dado de baja al pasajero del coche");
 		else
-			System.out.println("No se ha podido dar de baja");
+			System.out.println("No se ha podido dar de baja el pasajero del coche");
 	}
 	
 	private static void listarPasajerosCoche() {
